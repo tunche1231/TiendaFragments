@@ -1,22 +1,44 @@
 package com.example.tiendafragments;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.Toast;
+
+
 
 public class MainActivity extends AppCompatActivity implements ListaCategoriaFragment.CallbackCategoria {
 
     DetalleFragment det_fragment;
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
+                this,drawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
         FragmentManager fm = getSupportFragmentManager();
         ListaCategoriaFragment lcf =
                 (ListaCategoriaFragment) fm.findFragmentById(R.id.lista_categorias);
@@ -43,4 +65,14 @@ public class MainActivity extends AppCompatActivity implements ListaCategoriaFra
             startActivity(i);
         }
     }
+
+    @Override
+    public void onBackPressed(){
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+    }
+
 }
