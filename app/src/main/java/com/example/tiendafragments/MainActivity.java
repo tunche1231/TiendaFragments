@@ -14,12 +14,14 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 
 
 public class MainActivity extends AppCompatActivity implements ListaCategoriaFragment.CallbackCategoria {
 
     DetalleFragment det_fragment;
     DrawerLayout drawerLayout;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements ListaCategoriaFra
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        tabLayout = findViewById(R.id.tabLayout2);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
